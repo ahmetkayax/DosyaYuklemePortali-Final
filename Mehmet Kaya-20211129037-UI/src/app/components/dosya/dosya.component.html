@@ -1,0 +1,92 @@
+ <div class ="container">
+  <h1>Dosyalar</h1>
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="Filtrele($event)" style="width: 100%;">
+  </mat-form-field>
+  
+  <button mat-fab color="primary" matTooltip="Dosya Ekle" (click)="DosyaEkle()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+  <p>&nbsp;</p>
+  
+
+  <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="dosyaFoto">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Foto </mat-header-cell>
+      <mat-cell *matCellDef="let kayit" style="display: flex; align-items: center; justify-content: flex-start;">
+        <img src="{{apiServis.siteUrl + '/Dosyalar/'+ kayit.dosyaFoto}}" style="width: 100px; cursor: pointer;"
+          matTooltip="Fotoğraf Güncellemek İçin Tıklayınız" (click)="FotoGuncelle(kayit)" />
+      </mat-cell>
+    </ng-container>
+    
+
+    <ng-container matColumnDef="dosyaNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya No
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dosyaNo}}  </mat-cell>
+    </ng-container>
+  
+
+      <ng-container matColumnDef="dosyaAdi">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Adı
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.dosyaAdi}}  </mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="dosyaTarihi">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: right; padding-right: 10px;"> Dosya Yükleme Tarihi </mat-header-cell>
+        <mat-cell *matCellDef="let kayit" style="display: flex; align-items: center; justify-content: center;"> {{kayit.dosyaTarihi}} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="dosyaYolu">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Yolu </mat-header-cell>
+        <mat-cell *matCellDef="let kayit" style="display: flex; align-items: center; justify-content: center;">
+          <span style="cursor: pointer; display: flex; flex-direction: column; align-items: center;">
+            <i class="material-icons" style="color: purple; font-size: 24px;">insert_drive_file</i>
+            <a [href]="apiServis.siteUrl + '/PdfDosyalar/' + kayit.dosyaYolu" target="_blank" style="color: purple; text-decoration: none; margin-top: 4px;">
+              <span style="text-decoration: underline">{{kayit.dosyaYolu}}</span>
+            </a>
+          </span>
+        </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="dosyaDersSayisi">
+        <mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Dosya Ders Sayısı </mat-header-cell>
+        <mat-cell *matCellDef="let kayit" style="display: flex; align-items: center; justify-content: center;"> {{kayit.dosyaDersSayisi}} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="islemler">
+        <mat-header-cell *matHeaderCellDef> İşlemler </mat-header-cell>
+        <mat-cell *matCellDef="let kayit" style="display: flex; align-items: center; justify-content: center;">
+          <button mat-icon-button color="primary" matTooltip="Ders Listesi" [routerLink]="['/derslistele',kayit.dosyaId]">
+            <mat-icon aria-label="label">book</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="Dosya Düzenle" (click)="DosyaDuzenle(kayit)">
+            <mat-icon aria-label="label">edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" matTooltip="Dosya Sil" (click)="DosyaSil(kayit)">
+            <mat-icon aria-label="label">delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+      
+      
+    
+
+        
+      
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+ 
+    <mat-paginator [pageSizeOptions]="[ 10, 25,50, 100,500]" showFirstLastButtons="">
+    </mat-paginator>
+  </div>
+
+
+
+
+
+

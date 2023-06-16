@@ -1,0 +1,100 @@
+<div class="container">
+  <h1>Dosya Listesi</h1>
+  <h3> <p><b>Ders Kodu : </b> {{secDers?.dersKodu}}</p>
+  <p><b>Ders Adı : </b> {{secDers?.dersAdi}}</p>
+  <p><b>Ders Kredi : </b> {{secDers?.DersKredi}}</p></h3>
+
+  <button mat-fab color="primary" matTooltip="Ders Listesine Dön" [routerLink]="['/ders']">
+    <mat-icon aria-label="label">arrow_back</mat-icon>
+  </button> &nbsp;
+  <button mat-fab color="primary" matTooltip="Öğrenci Ekle" (click)=" DosyaEkle()">
+    <mat-icon aria-label="label">add</mat-icon>
+  </button>
+
+
+
+
+<p>&nbsp;</p>
+<h2 style="color:red" *ngIf="kayitlar?.length==0">Derse Henüz Bir Dosya Yüklenmedi!</h2>
+ <mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="dosyaFoto">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Foto
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+
+        <img src="{{apiServis.siteUrl + '/Dosyalar/'+ kayit.dosyaBilgi.dosyaFoto}}" style="width: 100px;cursor: pointer;"/>
+
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dosyaNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya No
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dosyaBilgi.dosyaNo}}  </mat-cell>
+    </ng-container>
+  
+
+      <ng-container matColumnDef="dosyaAdi">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Adı
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.dosyaBilgi.dosyaAdi}}  </mat-cell>
+      </ng-container>
+  
+
+        <ng-container matColumnDef="dosyaTarihi">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Yükleme Tarihi
+          </mat-header-cell>
+          <mat-cell *matCellDef="let kayit"> {{kayit.dosyaBilgi.dosyaTarihi}} </mat-cell>
+        </ng-container>
+  
+      
+          <ng-container matColumnDef="dosyaYolu">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Yolu
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.dosyaBilgi.dosyaYolu}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dosyaDersSayisi">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Ders Sayisi
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.dosyaBilgi.dosyaDersSayisi}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="islemler">
+            <mat-header-cell *matHeaderCellDef > İşlemler
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+             
+              <button mat-icon-button color="warn" matTooltip="Öğrenciyi Dersten Sil" (click)="DosyaSil(kayit)">
+                <mat-icon aria-label="label">delete</mat-icon>
+              </button>
+       
+
+            </mat-cell>
+          </ng-container>
+    
+
+        
+         a-md-data-table-column
+         <!-- press ctrl + space to add more column snippet or delete this line -->
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+
+ 
+    <mat-paginator [pageSizeOptions]="[ 10, 25,50, 100,500]" showFirstLastButtons="">
+    </mat-paginator>
+
+
+
+
+
+
+
+
+
+
+
+</div>

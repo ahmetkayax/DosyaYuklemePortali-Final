@@ -1,0 +1,18 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>Fotoğraf Güncelle</span>
+</mat-toolbar>
+<div class="container">
+<div *ngIf="secDosya">
+  <h3><b>Dosya No : </b>{{secDosya.dosyaNo}} <b>Dosya Adı : </b> {{secDosya.dosyaAdi}}</h3>&nbsp;
+<h3>Şuan ki Dosya Fotoğrafı</h3>
+<img [src]="apiServis.siteUrl+'/Dosyalar/'+secDosya.dosyaFoto" style="width: 200px;">
+</div>
+<p>&nbsp;</p>
+<h3>Yeni Yüklenecek Dosya Fotoğrafı</h3>
+  <img [src]="secilenFoto" style="width: 200px;" />
+  <input type="file" name="" id="" (change)="FotoSec($event)" #foto hidden="true">
+  <p>&nbsp;</p>
+  <button mat-raised-button color="primary" (click)="foto.click()">Fotoğraf Seç</button>&nbsp;
+  <button mat-raised-button color="primary" (click)="dosyaFotoDialogRef.close(dosyaFoto)" [disabled]="!secilenFoto">Kaydet</button>&nbsp;
+  <button mat-raised-button color="warn" (click)="dosyaFotoDialogRef.close()">İptal</button>
+</div>

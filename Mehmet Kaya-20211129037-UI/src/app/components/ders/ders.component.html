@@ -1,0 +1,54 @@
+<h2>Dersler</h2>
+
+<button mat-fab color="primary" matTooltip="Ders Ekle" (click)="DersEkle()">
+  <mat-icon aria-label="label">add</mat-icon>
+</button>
+<mat-form-field appearance="outline">
+  <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="Filterele($event)">
+</mat-form-field>
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="dersKodu">
+    <mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Ders Kodu </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dersKodu}} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="dersAdi">
+    <mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Ders Adı </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dersAdi}} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="DersKredi">
+    <mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Ders Kredi </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.DersKredi}} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="dersDosyaSayisi">
+    <mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center;"> Dosya Sayısı </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dersDosyaSayisi}} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="islemler">
+    <mat-header-cell *matHeaderCellDef style="text-align: center;"> İşlemler </mat-header-cell>
+    <mat-cell *matCellDef="let kayit">
+      <button mat-icon-button color="primary" matTooltip="Dosya Listesi" [routerLink]="['/dosyalistele',kayit.dersId]">
+        <mat-icon aria-label="label">folder</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" matTooltip="Ders Düzenle" (click)="DersDuzenle(kayit)">
+        <mat-icon aria-label="label">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" matTooltip="Ders Sil" (click)="DersSil(kayit)">
+        <mat-icon aria-label="label">delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+  
+  
+  
+  
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator [length]="dersler?.length" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+</mat-paginator>

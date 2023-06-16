@@ -1,0 +1,81 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>Dosya Seç</span>
+</mat-toolbar>
+
+<div class ="container">
+ 
+  <mat-form-field appearance="outline">
+    <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="Filtrele($event)">
+  </mat-form-field>
+    
+
+  <mat-table [dataSource]="dataSource" matSort >
+
+    <ng-container matColumnDef="dosyaFoto">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Foto
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit">
+
+        <img src="{{apiServis.siteUrl + '/Dosyalar/'+ kayit.dosyaFoto}}" style="width: 100px;cursor: pointer;"/>
+
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dosyaNo">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya No
+      </mat-header-cell>
+      <mat-cell *matCellDef="let kayit"> {{kayit.dosyaNo}}  </mat-cell>
+    </ng-container>
+  
+
+      <ng-container matColumnDef="dosyaAdi">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Adı
+        </mat-header-cell>
+        <mat-cell *matCellDef="let kayit"> {{kayit.dosyaAdi}}  </mat-cell>
+      </ng-container>
+  
+
+        <ng-container matColumnDef="dosyaTarihi">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Yükleme Tarihi
+          </mat-header-cell>
+          <mat-cell *matCellDef="let kayit"> {{kayit.dosyaTarihi}} </mat-cell>
+        </ng-container>
+  
+      
+          <ng-container matColumnDef="dosyaYolu">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Yolu
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.dosyaYolu}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="dosyaDersSayisi">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Dosya Ders Sayisi
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit"> {{kayit.dosyaDersSayisi}} </mat-cell>
+          </ng-container>
+  
+          <ng-container matColumnDef="islemler" >
+            <mat-header-cell *matHeaderCellDef > İşlemler
+            </mat-header-cell>
+            <mat-cell *matCellDef="let kayit">
+       
+              <button mat-icon-button color="primary" matTooltip="Dosya Yükle" (click)="DosyaSec(kayit)" style="width: 100%;">
+                <mat-icon aria-label="label">upload_file</mat-icon> Yükle
+              </button>
+
+            </mat-cell>
+          </ng-container>
+
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[ 10, 25,50, 100,500]" showFirstLastButtons="">
+    </mat-paginator>
+  </div>
+
+
+
+
+
+

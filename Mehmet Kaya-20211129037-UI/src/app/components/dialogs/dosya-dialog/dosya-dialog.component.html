@@ -1,0 +1,42 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+  <span>{{dialogBaslik}}</span>
+</mat-toolbar>
+<div class="container">
+
+  <form [formGroup]="frm">
+    <mat-form-field appearance="outline">
+      <mat-label>Dosya Numarası</mat-label>
+      <input matInput formControlName="dosyaNo" placeholder="Dosya Numarası" name="dosyaNo" required="" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Dosya Adı</mat-label>
+      <input matInput formControlName="dosyaAdi" placeholder="Dosya Adı" name="dosyaAdi" required="" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Dosya Yükleme Tarihi</mat-label>
+      <input matInput formControlName="dosyaTarihi" placeholder="Dosya Yükleme Tarihi" name="dosyaTarihi" required =""
+        type="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Dosya Yolu</mat-label>
+      <input matInput formControlName="dosyaYolu" placeholder="Dosya Yolu" name="dosyaYolu" required =""
+        type="text">
+    </mat-form-field>
+
+    <input type="file" id="dosyaSec" name="dosyaYolu" accept=".txt,.pdf,.doc,.docx">
+
+  </form>
+
+  <p>&nbsp;</p>
+
+</div>
+&nbsp; &nbsp; &nbsp;  
+
+<button mat-raised-button color="primary" (click)="dialogRef.close(frm.value)"
+  [disabled]="frm.invalid">Kaydet</button>&nbsp;
+<button mat-raised-button color="warn" (click)="dialogRef.close()">Kapat</button>
+
+<p>&nbsp;</p>
